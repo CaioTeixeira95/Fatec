@@ -264,7 +264,9 @@ void buscaCliente(Fila *fb, Fila *fp){
 
         //Busca na fila normal
         if(fb->inicio != NULL){
-
+            
+            i = 0;
+            
             cli = fb->inicio;
 
             while(cli != NULL){
