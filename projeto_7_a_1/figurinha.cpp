@@ -101,5 +101,5 @@ int main(){
 
   imprimeFigurinhas(p);
 
-  return 0;
+  //return 0;
 }
