@@ -156,6 +156,7 @@ int main(){
   return 0;
 }
 
+/* CONSTRUTOR DE UM PACOTE */
 Pacote * inicializarPacote(){
 
   Pacote *p = new Pacote;
@@ -168,7 +169,14 @@ Pacote * inicializarPacote(){
 
 /* ESSA FUNÇÃO COLA UMA FIGURINHA DIGITADA PELO USUARIO NO ALBUM */
 void figurinhaAvulsa(Pacote *album, Pacote *pacoteRepetidas){
+
   system("clear");
+
+  if(album->qtd == 681){
+    cout << "Você completou o seu album da Copa do Mundo da Russia. Parabéns!\n\n";
+    return;
+  }
+
   int figurinha;
   cout << "Digite a figurinha que deseja colar: ";
   cin >> figurinha;
@@ -184,7 +192,9 @@ void figurinhaAvulsa(Pacote *album, Pacote *pacoteRepetidas){
 
 /* ESSA FUNÇÃO GERA UM PACOTE NOVO DE FIGURINHAS */
 void comprarFigurinha(Pacote *album, Pacote *pacoteRepetidas){
+
   system("clear");
+
   if(album->qtd == 681){
     cout << "Você completou o seu album da Copa do Mundo da Russia. Parabéns!\n\n";
     return;
@@ -225,7 +235,14 @@ void comprarFigurinha(Pacote *album, Pacote *pacoteRepetidas){
 
 /* ESSA FUNÇÃO TROCA FIGURINHAS */
 void trocarFigurinha(Pacote *album, Pacote *pacoteRepetidas){
+
   system("clear");
+
+  if(album->qtd == 681){
+    cout << "Você completou o seu album da Copa do Mundo da Russia. Parabéns!\n\n";
+    return;
+  }
+
   int figurinha = 0, figurinhaRepetida = 0;
   cout << "Digite a figurinha que você está recebendo na troca: ";
   cin >> figurinha;
@@ -273,7 +290,9 @@ void trocarFigurinha(Pacote *album, Pacote *pacoteRepetidas){
 
 /* ESSA FUNÇÃO COLA FIGURINHAS NO ALBUM E COLOCA FIGURINHAS REPETIDAS NA LISTA DE REPETIDAS */
 int verificaAlbum(Figurinha *novaFigurinha, Pacote *album, Pacote *pacoteRepetidas){
+
   system("clear");
+
   bool resposta = false; //Controla para saber se a ordenação foi feita
   aux_album = album->head; //Nó auxiliar recebendo o valor da cabeça da album
 
