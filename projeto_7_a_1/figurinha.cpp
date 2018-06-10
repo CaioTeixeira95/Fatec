@@ -163,7 +163,7 @@ int main(){
         cout << "Valor inválido!\n\n";
       break;
     }
-  } while(opcao != 8);
+  } while(opcao != 9);
 
   destruir(pacoteRepetidas, album);
 
