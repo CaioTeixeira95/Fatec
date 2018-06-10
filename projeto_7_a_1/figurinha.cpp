@@ -83,11 +83,12 @@ int main(){
     cout << "4 - Mostrar Album\n";
     cout << "5 - Figurinhas repetidas\n";
     cout << "6 - Figurinhas que faltam\n";
-    cout << "7 - Buscar figurinha\n";
-    cout << "8 - Sair\n\n";
+    cout << "7 - Buscar figurinha no album\n";
+    cout << "8 - Buscar figurinha nas repetidas\n";
+    cout << "9 - Sair\n\n";
 
-    cout << "9  - Salvar progresso em um arquivo\n";
-    cout << "10 - Carregar progresso\n\n";
+    cout << "10 - Salvar progresso\n";
+    cout << "11 - Carregar progresso\n\n";
 
     cout << "Digite o opção desejada: ";
 
@@ -123,7 +124,7 @@ int main(){
 
       case 7:
 
-        cout << "Digite a figurinha que deseja buscar: ";
+        cout << "Digite a figurinha que deseja buscar no album: ";
         cin >> valor;
 
         if(buscarAlbum(album, valor) == false){
@@ -134,14 +135,27 @@ int main(){
 
       break;
 
-      case 8: //Sair do sistema
+      case 8:
+
+        cout << "Digite a figurinha que deseja buscar nas repetidas: ";
+        cin >> valor;
+
+        if(buscarAlbum(pacoteRepetidas, valor) == false){
+          cout << "Essa figurinha está no pacote de repetidas.\n\n";
+        } else {
+          cout << "Essa figurinha não está no pacote de repetidas.\n\n";
+        }
+
       break;
 
-      case 9:
-        salvarArquivo(album, pacoteRepetidas);
+      case 9: //Sair do sistema
       break;
 
       case 10:
+        salvarArquivo(album, pacoteRepetidas);
+      break;
+
+      case 11:
         carregarArquivo(album, pacoteRepetidas);
       break;
 
