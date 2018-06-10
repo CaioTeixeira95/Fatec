@@ -14,7 +14,7 @@
 ****************************************
 * Gravar em arquivos   *     Ok        *
 ****************************************
-* Ler de arquivos      *               *
+* Ler de arquivos      *     Ok        *
 ****************************************
 */
 #include <iostream>
@@ -76,7 +76,7 @@ int main(){
 
   do {
 
-    cout << "*** Album da Copa da Russia de 2018 ***\n\n";
+    cout << "*** Album da Copa do Mundo da Russia de 2018 ***\n\n";
     cout << "1 - Novo pacote de figurinha\n";
     cout << "2 - Colar figurinha avulsa\n";
     cout << "3 - Trocar figurinha\n";
@@ -168,7 +168,7 @@ Pacote * inicializarPacote(){
 
 /* ESSA FUNÇÃO COLA UMA FIGURINHA DIGITADA PELO USUARIO NO ALBUM */
 void figurinhaAvulsa(Pacote *album, Pacote *pacoteRepetidas){
-
+  system("clear");
   int figurinha;
   cout << "Digite a figurinha que deseja colar: ";
   cin >> figurinha;
@@ -184,7 +184,7 @@ void figurinhaAvulsa(Pacote *album, Pacote *pacoteRepetidas){
 
 /* ESSA FUNÇÃO GERA UM PACOTE NOVO DE FIGURINHAS */
 void comprarFigurinha(Pacote *album, Pacote *pacoteRepetidas){
-
+  system("clear");
   if(album->qtd == 681){
     cout << "Você completou o seu album da Copa do Mundo da Russia. Parabéns!\n\n";
     return;
@@ -225,7 +225,7 @@ void comprarFigurinha(Pacote *album, Pacote *pacoteRepetidas){
 
 /* ESSA FUNÇÃO TROCA FIGURINHAS */
 void trocarFigurinha(Pacote *album, Pacote *pacoteRepetidas){
-
+  system("clear");
   int figurinha = 0, figurinhaRepetida = 0;
   cout << "Digite a figurinha que você está recebendo na troca: ";
   cin >> figurinha;
@@ -273,7 +273,7 @@ void trocarFigurinha(Pacote *album, Pacote *pacoteRepetidas){
 
 /* ESSA FUNÇÃO COLA FIGURINHAS NO ALBUM E COLOCA FIGURINHAS REPETIDAS NA LISTA DE REPETIDAS */
 int verificaAlbum(Figurinha *novaFigurinha, Pacote *album, Pacote *pacoteRepetidas){
-
+  system("clear");
   bool resposta = false; //Controla para saber se a ordenação foi feita
   aux_album = album->head; //Nó auxiliar recebendo o valor da cabeça da album
 
@@ -388,7 +388,7 @@ bool buscarAlbum(Pacote *album, int figurinha){
 
 /* IMPRIME O ALBUM E TAMBÉM A PILHA DE FIGURINHAS REPETIDAS*/
 void imprimeFigurinhas(Pacote *p, int x){
-
+  system("clear");
   if(p->head == NULL){
     cout << "Não há figurinhas para serem mostradas.\n\n\n";
   } else {
@@ -420,7 +420,7 @@ void imprimeFigurinhas(Pacote *p, int x){
 
 /* ESSA FUNÇÃO CALCULA QUANTAS FIGURINHAS ESTÃO FALTANDO, E DESCREVE QUAIS SÃO */
 void imprimeFigurinhasFaltantes(Pacote *album){
-
+  system("clear");
   if(album->qtd == 681)
     cout << "Você completou o seu album. Parabéns!\n\n";
   else{
@@ -445,6 +445,7 @@ void imprimeFigurinhasFaltantes(Pacote *album){
 
 /* ESSA FUNÇÃO SALVA O PROGRESSO EM UM ARQUIVO TXT */
 void salvarArquivo(Pacote *album, Pacote *pacoteRepetidas){
+  system("clear");
   if(album->head == NULL && pacoteRepetidas->head == NULL){
     cout << "Não progresso para ser salvo.\n\n";
   } else {
@@ -471,60 +472,44 @@ void salvarArquivo(Pacote *album, Pacote *pacoteRepetidas){
     } else {
       cout << "Não figurinhas repetidas para serem salvas.\n\n";
     }
+
+    cout << "Progresso salvo com sucesso.\n\n";
   }
 }
 
 /* ESSA FUNÇÃO CARREGA O PROGRESSO DE UM ARQUIVO TXT */
 void carregarArquivo(Pacote *album, Pacote *pacoteRepetidas){
 
+  system("clear");
   string figurinha;
 
-  arquivo.open("album.txt", ios::in);
-
+  arquivo.open("album.txt", ios::in | ios::app);
   if(arquivo.is_open()){
-      while(getline(arquivo, figurinha)){
+    while(getline(arquivo, figurinha)){
           Figurinha *figArqN = new Figurinha;
           istringstream ss(figurinha);
           ss >> figArqN->figurinha;
-          if(album->head == NULL){
-            figArqN->prox = album->head;
-            album->head = figArqN;
-            cout << "oi1";
-          } else {
-            aux_album = album->head;
-            while(aux_album->prox != NULL){
-              aux_album = aux_album->prox;
-            }
-            aux_album->prox = figArqN;
-          }
+          verificaAlbum(figArqN, album, pacoteRepetidas);
       }
       arquivo.close();
   } else {
       cout << "Não foi possivel abrir o arquivo.\n";
   }
 
-  arquivo.open("pacoteRepetidas.txt", ios::in);
-
+  arquivo.open("pacoteRepetidas.txt", ios::in | ios::app);
   if(arquivo.is_open()){
       while(getline(arquivo, figurinha)){
           Figurinha *figArqR = new Figurinha;
           istringstream ss(figurinha);
           ss >> figArqR->figurinha;
-          if(pacoteRepetidas->head == NULL){
-            figArqR->prox = pacoteRepetidas->head;
-            pacoteRepetidas->head = figArqR;
-          } else {
-            aux_pacoteRepetidas = pacoteRepetidas->head;
-            while(aux_pacoteRepetidas->prox != NULL){
-              aux_pacoteRepetidas = aux_pacoteRepetidas->prox;
-            }
-            aux_pacoteRepetidas->prox = figArqR;
-          }
+          verificaAlbum(figArqR, album, pacoteRepetidas);
       }
       arquivo.close();
   } else {
       cout << "Não foi possivel abrir o arquivo.\n";
   }
+  cout << "Progresso carregado com sucesso.\n\n";
+
 }
 
 void destruir(Pacote *repetidas, Pacote *album){
